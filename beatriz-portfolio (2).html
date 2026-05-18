@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Beatriz Fernandes — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #F2ECD8;
+    --warm-white: #F7F2E6;
+    --ink: #2A1A0E;
+    --ink-mid: #6B4226;
+    --ink-soft: #C4B6A6;
+    --accent: #A45A3D;
+    --accent-light: #D9BF77;
+    --accent-pale: #EDE3C4;
+    --rule: #C4B6A6;
+    --dust: #E8DAB2;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 4rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.25s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-tagline {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.55s forwards;
+  }
+  .btn-primary {
+    padding: 0.75rem 2rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn-secondary {
+    padding: 0.75rem 2rem;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  .hero-right {
+    position: relative;
+    background: #E8DAB2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      #D9BF77 39px,
+      #D9BF77 40px
+    );
+    opacity: 0.25;
+  }
+  .hero-visual {
+    position: relative; z-index: 1;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: var(--accent-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 5rem;
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+    box-shadow: 0 32px 80px rgba(164,90,61,0.2);
+    opacity: 0;
+    animation: fadeIn 1s ease 0.7s forwards;
+  }
+  .hero-stat-bar {
+    position: absolute; bottom: 3rem; left: 3rem; right: 3rem;
+    display: flex; gap: 2rem;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--accent);
+    flex: 1;
+  }
+  .hero-stat-value {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 0.25rem;
+  }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 7rem 4rem; }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .section-num {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+    margin-left: 1rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--warm-white); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-sidebar {}
+  .about-kicker {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .about-intro {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .about-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .about-tag {
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--rule);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--cream);
+  }
+  .about-bio {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--ink-mid);
+  }
+  .about-bio p + p { margin-top: 1.25rem; }
+  .about-accent {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-pale);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--cream); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .skills-column-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .skill-item { margin-bottom: 1.5rem; }
+  .skill-header {
+    display: flex; justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+  .skill-name {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .skill-level {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .skill-bar {
+    height: 2px;
+    background: var(--rule);
+    position: relative;
+    overflow: visible;
+  }
+  .skill-fill {
+    height: 100%;
+    background: var(--accent);
+    position: relative;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1s cubic-bezier(0.4,0,0.2,1);
+  }
+  .skill-fill.animated { transform: scaleX(1); }
+
+  /* ── PORTFOLIO ── */
+  #portfolio { background: var(--warm-white); }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .portfolio-card {
+    position: relative;
+    background: var(--cream);
+    padding: 2.5rem;
+    border: 1px solid var(--rule);
+    transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    overflow: hidden;
+  }
+  .portfolio-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .portfolio-card:hover { border-color: var(--accent-light); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.07); }
+  .portfolio-card:hover::before { transform: scaleX(1); }
+  .portfolio-card.placeholder { opacity: 0.55; }
+  .card-tag {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    background: var(--accent-pale);
+    color: var(--accent);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .card-desc {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .card-tools {
+    margin-top: 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .card-tool {
+    padding: 0.2rem 0.6rem;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .card-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 400;
+    transition: gap 0.2s;
+  }
+  .card-link:hover { gap: 0.7rem; }
+  .card-link-placeholder {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  #certifications { background: var(--cream); }
+  .cert-group { margin-bottom: 3.5rem; }
+  .cert-group-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.5rem;
+  }
+  .cert-list { display: flex; flex-direction: column; gap: 1rem; }
+  .cert-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .cert-item:hover { border-color: var(--accent-light); box-shadow: 0 4px 24px rgba(176,125,78,0.08); }
+  .cert-icon {
+    width: 36px; height: 36px;
+    background: var(--accent-pale);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .cert-name {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .cert-issuer {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-top: 0.15rem;
+  }
+  .cert-year {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .cert-soon {
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: #170E07; color: var(--cream); }
+  #contact .section-title { color: var(--cream); }
+  #contact .section-title em { color: var(--accent); }
+  #contact .section-num { color: var(--accent-light); }
+  #contact .section-rule { background: rgba(255,255,255,0.12); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .contact-statement {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: rgba(250,248,244,0.85);
+    margin-bottom: 2rem;
+  }
+  .contact-statement em { font-style: italic; color: var(--accent); }
+  .contact-links { display: flex; flex-direction: column; gap: 1.25rem; }
+  .contact-link-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .contact-link-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(250,248,244,0.4);
+    width: 80px;
+    flex-shrink: 0;
+  }
+  .contact-link-val {
+    font-size: 0.9rem;
+    color: var(--cream);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-link-val:hover { color: var(--accent); }
+  .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .contact-form input,
+  .contact-form textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    padding: 0.9rem 1.1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+    width: 100%;
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { color: rgba(250,248,244,0.3); }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--accent); }
+  .contact-form textarea { height: 120px; }
+  .btn-send {
+    padding: 0.9rem 2.5rem;
+    background: var(--accent);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-send:hover { background: #6B4226; transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #170E07;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(250,248,244,0.4);
+  }
+  .footer-note {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: rgba(250,248,244,0.25);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #home { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 8rem 1.5rem 4rem; }
+    section { padding: 5rem 1.5rem; }
+    .about-grid,
+    .skills-grid,
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">Beatriz Fernandes</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Data Analyst · Lisbon, Portugal</p>
+    <h1 class="hero-name">Beatriz<br /><em>Fernandes</em></h1>
+    <p class="hero-tagline">Aspiring Data Analyst &nbsp;|&nbsp; Sports &amp; Management</p>
+    <div class="hero-cta">
+      <a href="#portfolio" class="btn-primary">View Portfolio</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">BF</div>
+    <div class="hero-stat-bar">
+      <div class="hero-stat">
+        <div class="hero-stat-value">5+</div>
+        <div class="hero-stat-label">Years Elite Sport</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">3.94</div>
+        <div class="hero-stat-label">M.S. GPA</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">2026</div>
+        <div class="hero-stat-label">Ironhack Certified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About <em>me</em></h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-sidebar">
+      <p class="about-kicker">Background</p>
+      <p class="about-intro">Where sport science, data, and management converge.</p>
+      <div class="about-tags">
+        <span class="about-tag">Sports Analytics</span>
+        <span class="about-tag">Python</span>
+        <span class="about-tag">SQL</span>
+        <span class="about-tag">Power BI</span>
+        <span class="about-tag">Tableau</span>
+        <span class="about-tag">Machine Learning</span>
+        <span class="about-tag">CRM</span>
+        <span class="about-tag">Load Monitoring</span>
+        <span class="about-tag">Retail Analytics</span>
+      </div>
+    </div>
+    <div>
+      <div class="about-bio">
+        <p>Data Analyst freshly certified from Ironhack's programme in Lisbon (2026), with a background that cuts across high-performance sport, aviation, and client operations in the relocation sector.</p>
+        <p>Spent 5+ years in the US working in elite sport environments where data — GPS outputs, force plate metrics, load monitoring — informed daily decisions. Returned to Portugal intentionally, adding a Cabin Crew certification and hands-on CRM experience before completing a full data analytics training covering Python, SQL, Tableau, Power BI, machine learning and statistical modelling.</p>
+        <p>Built an end-to-end capstone project in retail analytics. M.S. in Management, 3.94 GPA. Looking for a first data role where I can grow properly and contribute from day one.</p>
+      </div>
+      <div class="about-accent">
+        "I've always been the person who wanted to understand the numbers behind performance — now I have the toolkit to do it in any industry."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Skills &amp; <em>Tools</em></h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="skills-grid">
+    <div>
+      <p class="skills-column-title">Technical — Data &amp; Analytics</p>
+
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">SQL</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Power BI</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.82"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Tableau</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.8"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Python (Pandas, NumPy, Matplotlib)</span><span class="skill-level">Intermediate</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.72"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Excel / Power Query</span><span class="skill-level">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.9"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Statistical Modelling &amp; ML</span><span class="skill-level">Foundational</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.65"></div></div>
+      </div>
+    </div>
+
+    <div>
+      <p class="skills-column-title">Domain &amp; Soft Skills</p>
+
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Sports Performance Data (GPS, Force Plate)</span><span class="skill-level">Expert</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Stakeholder Communication</span><span class="skill-level">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.92"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">CRM &amp; Client Operations</span><span class="skill-level">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.88"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Project &amp; Team Management</span><span class="skill-level">Advanced</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.87"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Data Storytelling &amp; Reporting</span><span class="skill-level">Proficient</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="0.83"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">English (Fluent) · Portuguese (Native)</span><span class="skill-level">Bilingual</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="1.0"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Project <em>Portfolio</em></h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="portfolio-grid">
+
+    <!-- Capstone project -->
+    <div class="portfolio-card">
+      <span class="card-tag">Capstone · Ironhack</span>
+      <h3 class="card-title">Retail Analytics — End-to-End</h3>
+      <p class="card-desc">Full pipeline from raw data to business recommendations: data cleaning, EDA, predictive modelling, and an interactive dashboard built for a retail scenario.</p>
+      <div class="card-tools">
+        <span class="card-tool">Python</span>
+        <span class="card-tool">SQL</span>
+        <span class="card-tool">Power BI</span>
+        <span class="card-tool">Machine Learning</span>
+      </div>
+      <span class="card-link-placeholder">↗ Link coming soon</span>
+    </div>
+
+    <!-- Placeholder 2 -->
+    <div class="portfolio-card placeholder">
+      <span class="card-tag">Sports Analytics</span>
+      <h3 class="card-title">Performance Dashboard — Coming Soon</h3>
+      <p class="card-desc">An interactive dashboard built on public football/basketball data, exploring player performance metrics and team efficiency indicators.</p>
+      <div class="card-tools">
+        <span class="card-tool">Power BI</span>
+        <span class="card-tool">Python</span>
+        <span class="card-tool">FBref Data</span>
+      </div>
+      <span class="card-link-placeholder">↗ In progress</span>
+    </div>
+
+    <!-- Placeholder 3 -->
+    <div class="portfolio-card placeholder">
+      <span class="card-tag">Business Analytics</span>
+      <h3 class="card-title">Sponsorship &amp; Revenue Analysis — Coming Soon</h3>
+      <p class="card-desc">Exploring the business side of sport organisations — attendance patterns, sponsorship ROI, and revenue efficiency using public league data.</p>
+      <div class="card-tools">
+        <span class="card-tool">SQL</span>
+        <span class="card-tool">Excel</span>
+        <span class="card-tool">Tableau</span>
+      </div>
+      <span class="card-link-placeholder">↗ In progress</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title"><em>Certifications</em> &amp; Education</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="cert-group">
+    <p class="cert-group-title">Higher Education</p>
+    <div class="cert-list">
+      <div class="cert-item">
+        <div class="cert-icon">🎓</div>
+        <div>
+          <div class="cert-name">M.S. in Management &mdash; GPA 3.94</div>
+          <div class="cert-issuer">University — placeholder</div>
+        </div>
+        <div class="cert-year">–</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🎓</div>
+        <div>
+          <div class="cert-name">Undergraduate Degree — placeholder</div>
+          <div class="cert-issuer">University — placeholder</div>
+        </div>
+        <div class="cert-year">–</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cert-group">
+    <p class="cert-group-title">Technical Certifications</p>
+    <div class="cert-list">
+      <div class="cert-item">
+        <div class="cert-icon">📊</div>
+        <div>
+          <div class="cert-name">Data Analytics Bootcamp — Full Programme</div>
+          <div class="cert-issuer">Ironhack, Lisbon</div>
+        </div>
+        <div class="cert-year">2026</div>
+      </div>
+      <div class="cert-item cert-soon">
+        <div class="cert-icon">📋</div>
+        <div>
+          <div class="cert-name">Certification — placeholder</div>
+          <div class="cert-issuer">Issuer — placeholder</div>
+        </div>
+        <div class="cert-year">–</div>
+      </div>
+      <div class="cert-item cert-soon">
+        <div class="cert-icon">📋</div>
+        <div>
+          <div class="cert-name">Certification — placeholder</div>
+          <div class="cert-issuer">Issuer — placeholder</div>
+        </div>
+        <div class="cert-year">–</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Get in <em>Touch</em></h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-statement">Open to <em>junior data roles</em> in Lisbon and Madrid — and to conversations about where data meets sport, business, or anything in between.</p>
+      <div class="contact-links">
+        <div class="contact-link-row">
+          <span class="contact-link-label">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/beatriz-f-fernandes/" target="_blank" class="contact-link-val">beatriz-f-fernandes</a>
+        </div>
+        <div class="contact-link-row">
+          <span class="contact-link-label">GitHub</span>
+          <a href="https://github.com/letter-b" target="_blank" class="contact-link-val">letter-b</a>
+        </div>
+        <div class="contact-link-row">
+          <span class="contact-link-label">Location</span>
+          <span class="contact-link-val">Lisbon, Portugal</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form">
+        <input type="text" placeholder="Your name" />
+        <input type="email" placeholder="Your email" />
+        <textarea placeholder="Your message"></textarea>
+        <button class="btn-send">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Beatriz Fernandes</span>
+  <span class="footer-note">Data Analyst · Lisbon · 2026</span>
+</footer>
+
+<script>
+  // Skill bar animation on scroll
+  const fills = document.querySelectorAll('.skill-fill');
+  fills.forEach(el => {
+    el.style.width = (parseFloat(el.dataset.width) * 100) + '%';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-fill').forEach(el => {
+          el.classList.add('animated');
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const skillsSection = document.querySelector('#skills');
+  if (skillsSection) observer.observe(skillsSection);
+
+  // Nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
