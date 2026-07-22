@@ -426,6 +426,16 @@
     font-style: italic;
   }
 
+  .card-image {
+    width: calc(100% + 5rem);
+    margin: -2.5rem -2.5rem 1.5rem -2.5rem;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-bottom: 1px solid var(--rule);
+    display: block;
+  }
+
+
   /* ── CERTIFICATIONS ── */
   #certifications { background: var(--cream); }
   .cert-group { margin-bottom: 3.5rem; }
@@ -760,7 +770,23 @@
   </div>
   <div class="portfolio-grid">
 
+    <!-- Relocation Cost Optimizer -->
+    <div class="portfolio-card">
+      <img src="stay-compare-product-shot.png" alt="Relocation Cost Optimizer screenshot showing a map and cost comparison cards" class="card-image">
+      <span class="card-tag">Decision Analysis · Web App</span>
+      <h3 class="card-title">Relocation Cost Optimizer</h3>
+      <p class="card-desc">Interactive comparison tool built to evaluate apartments against extended-stay hotels for a multi-month relocation. Combines nightly/monthly rates, commute distance, credit-card rewards, and a weighted scoring layer to surface the best option under real constraints.</p>
+      <div class="card-tools">
+        <span class="card-tool">React</span>
+        <span class="card-tool">TypeScript</span>
+        <span class="card-tool">Google Maps API</span>
+        <span class="card-tool">Data Modeling</span>
+      </div>
+      <a href="https://buck-finder-map.lovable.app/" target="_blank" class="card-link">View live app ↗</a>
+    </div>
+
     <!-- Capstone project -->
+
     <div class="portfolio-card">
       <span class="card-tag">Capstone · Ironhack</span>
       <h3 class="card-title">Retail Analytics — End-to-End</h3>
